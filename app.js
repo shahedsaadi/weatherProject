@@ -5,6 +5,12 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
+//package for hide APIs key
+const dotenv = require('dotenv');
+dotenv.config();
+const secret = process.env.WEATHER_KEY;
+
+
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get("/", function(req, res){
@@ -15,7 +21,7 @@ app.get("/", function(req, res){
 app.post("/", function(req, res){
 
   const query = req.body.cityName;
-  const apiKey = "ec7d19ff7503ed3e82069a6fed857050";
+  const apiKey = secret;
   const unit = "metric";
   const url = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&units=" + unit + "&appid=" + apiKey;
 
